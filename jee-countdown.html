@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JEE Main 2026 Countdown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #f5f5f5;
+      padding: 1rem;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subheading {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+      font-weight: 300;
+    }
+
+    .date-info {
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      color: #b3e5fc;
+      font-weight: 500;
+    }
+
+    .timer {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .time-box {
+      min-width: 100px;
+      padding: 1.5rem 1rem;
+      border-radius: 15px;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .time-box:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 215, 0, 0.6);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5));
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+    }
+
+    .time-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #ffd89b;
+      display: block;
+    }
+
+    .time-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.5rem;
+      color: #b0bec5;
+      font-weight: 600;
+    }
+
+    .info-section {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #ffd89b;
+    }
+
+    .info-section h3 {
+      color: #ffd89b;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .info-section p {
+      font-size: 0.95rem;
+      color: #e0e0e0;
+      line-height: 1.5;
+    }
+
+    .sessions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .session-card {
+      padding: 1rem;
+      background: rgba(255, 215, 0, 0.05);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .session-card strong {
+      color: #ffd89b;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .session-card p {
+      font-size: 0.9rem;
+      color: #b0bec5;
+    }
+
+    .motivation {
+      font-size: 0.95rem;
+      color: #cfd8dc;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      color: #90caf9;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .countdown-active .time-value {
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        color: #ffd89b;
+      }
+      50% {
+        color: #ffe082;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .time-box {
+        min-width: 80px;
+        padding: 1rem 0.7rem;
+      }
+
+      .time-value {
+        font-size: 1.8rem;
+      }
+
+      .sessions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 JEE Main 2026</h1>
+    <p class="subheading">Countdown to Your Success</p>
+
+    <div class="date-info">
+      <strong>Session 1:</strong> 21–30 January 2026
+    </div>
+
+    <div class="timer countdown-active" id="timer">
+      <div class="time-box">
+        <span class="time-value" id="days">0</span>
+        <div class="time-label">Days</div>
+      </div>
+      <div class="time-box">
+        <span class="time-value" id="hours">00</span>
+        <div class="time-label">Hours</div>
+      </div>
+      <div class="time-box">
+        <span class="time-value" id="minutes">00</span>
+        <div class="time-label">Minutes</div>
+      </div>
+      <div class="time-box">
+        <span class="time-value" id="seconds">00</span>
+        <div class="time-label">Seconds</div>
+      </div>
+    </div>
+
+    <p class="motivation">
+      ⏰ Every second counts. Stay focused, stay consistent, and give your best! 💪
+    </p>
+
+    <div class="info-section">
+      <h3>📅 Important Dates</h3>
+      <div class="sessions">
+        <div class="session-card">
+          <strong>Session 1</strong>
+          <p>21–30 January 2026</p>
+        </div>
+        <div class="session-card">
+          <strong>Session 2</strong>
+          <p>2–9 April 2026</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h3>✅ Last-Minute Tips</h3>
+      <p>
+        Revise formulas, solve mock tests, maintain your sleep schedule, and believe in yourself. 
+        You've got this! 🚀
+      </p>
+    </div>
+
+    <footer>
+      JEE Main 2026 • Wishing you all the best! 🎓
+    </footer>
+  </div>
+
+  <script>
+    // Target: JEE Main 2026 Session 1 – 21 January 2026, 9:00 AM IST
+    const targetDate = new Date("2026-01-21T09:00:00+05:30").getTime();
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+    const timerEl = document.getElementById("timer");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        timerEl.classList.remove("countdown-active");
+        timerEl.innerHTML =
+          '<p style="font-size:1.5rem; font-weight:700; color:#ffd89b;">🎉 JEE Main 2026 Session 1 has started!</p><p style="font-size:1.2rem; color:#b3e5fc; margin-top:0.5rem;">All the best! Give your best effort! 🔥</p>';
+        clearInterval(intervalId);
+        return;
+      }
+
+      const second = 1000;
+      const minute = 60 * second;
+      const hour = 60 * minute;
+      const day = 24 * hour;
+
+      const days = Math.floor(diff / day);
+      const hours = Math.floor((diff % day) / hour);
+      const minutes = Math.floor((diff % hour) / minute);
+      const seconds = Math.floor((diff % minute) / second);
+
+      daysEl.textContent = days;
+      hoursEl.textContent = String(hours).padStart(2, "0");
+      minutesEl.textContent = String(minutes).padStart(2, "0");
+      secondsEl.textContent = String(seconds).padStart(2, "0");
+    }
+
+    const intervalId = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
